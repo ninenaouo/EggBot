@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <title>【EggBot】 神奇的海豹轉蛋機</title>
+        <link rel="stylesheet" href="./BOstyles.css">
+        <link rel="stylesheet" href="./myWebCss.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.10.25/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/cr-1.5.4/date-1.1.0/datatables.min.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>            
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+    </head>
+<body onload="onloadall()">
+<!--------------------頂標題--------------------->  
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <img class="img-fluid" src="./Picture/egg6.png" style="height: 35; width: 35;">
+        <a class="navbar-brand" href="./index.html">神奇的海豹轉蛋機</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#about">關於我</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">遊戲作品</a>
+                    <ul class="dropdown-menu nav-item">
+                      <li><a class="dropdown-item" href="#">神石之陸</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">小工具</a>
+                    <ul class="dropdown-menu nav-item">
+                      <li><a class="dropdown-item" href="#">點裝模擬器</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#portfolio">探索BOT功能</a></li>
+                <li class="nav-item"><a class="nav-link" href="#author">聯繫我</a></li>
+            </ul>
+        </div>
+    </div>
+    
+</nav>
+
+<div class="table_con" style="margin-top: 5rem">
+    <div style="flex-grow: 6;">
+        <div style="position: relative; top: 50px;;width: 100%; height: 40%; background-color: #3b3b3b;">
+            <div style="position:relative; color: wheat;">
+                <pre style="text-align: left; height: 200px; overflow: hidden;" id="enhancelog">
+
+                </pre>
+            </div>
+            <div id="log" style="padding: 20px; position:relative; width:auto; height: 500px;background-color: aliceblue; text-align: left; overflow:hidden;">
+            
+            </div>
+            
+        </div>
+    <!--視窗-->
+    </div>
+    
+    <div style="flex-grow: 8;background-color: #383131; position: relative;">
+        <div class="eqword">強化欄</div>
+        <div >
+            <div class="eq" style="margin-left: 15%;margin-top: 5%;position: relative;">
+               
+                <img   src="./Picture/crons.png" class="eqimg" style="position: absolute; left: 1px;">
+                <div style="position: relative; top:28px; width: 15px;height: 15px;  float:right;">
+                    <p id="crons" style="position: absolute; font-size: 13px;bottom: -22px;right: 1px; color: azure; float: right; font-weight: bold;">0</p>
+                </div>
+            </img>
+                
+        </div>
+        
+        </div>
+        <div class="table_con" style="margin-left:30px;margin-right:30px;margin-bottom:40px;">
+            <div style="flex-grow: 1; padding-top: 20px; ">
+                <div class="eq"style="float: left; margin:5px"><img  id="ingri"  src="./Picture/bde.png" class="eqimg" style="visibility :hidden "></img></div>
+                <div class="eq" style="float: right;margin:5px"><img id="enhancing" src="./Picture/4bde.png"class="eqimg" style="visibility :hidden "></div></img>
+                        <div class="progress" style="margin:20px">
+                            <div class="progress-bar">
+                            </div>
+                        </div>
+               
+            <p id="displayRate" style="margin-top: 20px;" class="eqword"></p>   
+            <p id="display" class="display eqword">請按下強化</p>  
+            <div style="text-align: center; "> 
+            <p class="eqword" style="text-align: center;">請輸入層數:</p>
+            <input style="text-align: right; width: 100px; float:initial;" type="number" id="stack" onchange="onRateCalc()"><br>
+            <button  type="button" id="en" class="btn btn-info" style="margin: 5px;" onclick="onclickGetStack()">儲存層數</button><br>
+            </div>
+            <input type="checkbox" id="skip" ><label for="skip" class="eqword">跳過動畫</label><br><input type="checkbox" id="cronsChk"  style="margin-left: 3px;"><label for="cronsChk" class="eqword">使用克羅恩石</label><br>
+            <button type="button" id="en" class="btn btn-danger" style="margin: 5px;" onclick="enhance()">強化</button><br>
+            <div style="float: right">
+                <button type="button" id="en" class="btn btn-secondary" style="margin:10px"  onclick="resetcrons()">重置克羅恩</button><br> 
+                <button type="button" id="en" class="btn btn-secondary" style="margin:10px"  onclick="resetlog()">重置強化紀錄</button><br>   
+            </div>
+        
+            <div  style="position: relative; float: left; top: 60px; right: 35px;">
+                <img   src="./Picture/crons.png" class="eqimg"><p  id="cronsCos"style="position: relative; float: right; color: azure;text-align: center; top: 10px;">消耗:</p></img>
+              
+            </div>
+           
+        </div>
+            
+        </div>
+    
+    
+      </div>
+    <div style="flex-grow: 5;" >
+        <div style="position: relative; top:100px;width: 100%; height: 40%; background-color: #3b3b3b;">
+            <div class="eqword">裝備欄</div>
+            <div id="bag" style="width: 100%; height: 90%;padding: 0px; border: 1px solid #555;background-color: #3b3b3b;overflow: auto;">
+                <div class="eq"style="float: left; margin:5px"><input id="bde" type="image" src="./Picture/bde.png" class="eqimg" onclick="onclickeq(id)"></div>
+                <div class="eq"style="float: left; margin:5px"><input id="1bde"  type="image" src="./Picture/1bde.png" class="eqimg" onclick="onclickeq(id)"></div>
+                <div class="eq"style="float: left; margin:5px"><input id="2bde" type="image" src="./Picture/2bde.png" class="eqimg" onclick="onclickeq(id)"></div>
+                <div class="eq"style="float: left; margin:5px"><input id="3bde" type="image" src="./Picture/3bde.png" class="eqimg" onclick="onclickeq(id)"></div>
+                <div class="eq"style="float: left; margin:5px"><input id="4bde" type="image" src="./Picture/4bde.png" class="eqimg" onclick="onclickeq(id)"></div>
+                <div class="eq"style="float: left; margin:5px"><input id="debobelt" type="image" src="./Picture/debobelt.png" class="eqimg" onclick="onclickeq(id)"></div>
+                <div class="eq"style="float: left; margin:5px"><input id="1debobelt" type="image" src="./Picture/1debobelt.png" class="eqimg" onclick="onclickeq(id)"></div>
+                <div class="eq"style="float: left; margin:5px"><input id="2debobelt" type="image" src="./Picture/2debobelt.png" class="eqimg" onclick="onclickeq(id)"></div>
+                <div class="eq"style="float: left; margin:5px"><input id="3debobelt" type="image" src="./Picture/3debobelt.png" class="eqimg" onclick="onclickeq(id)"></div>
+                <div class="eq"style="float: left; margin:5px"><input id="4debobelt" type="image" src="./Picture/4debobelt.png" class="eqimg" onclick="onclickeq(id)"></div>
+            </div>
+        </div>
+        <div >
+            <div style="position: relative; top:100px;width: 100%; height: 40%; background-color: #3b3b3b;">
+                <div class="eqword">層數欄</div>
+                <div id="stackbag" style="width: 100%; height: 90%;padding: 0px; border: 1px solid #555;background-color: #3b3b3b;overflow: auto;">
+                   
+                    
+                   
+                
+                </div>
+            </div>
+        </div>
+    </div>
+  
+ 
+</div>
+<script src="./myWebJS.js"></script>
+
+
+
+</body>
+</html>
